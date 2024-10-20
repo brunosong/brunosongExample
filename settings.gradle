@@ -1,1 +1,3 @@
 rootProject.name = 'brunosongExample'
+include 'spring-webflux'
+
