@@ -1,3 +1,5 @@
 rootProject.name = 'brunosongExample'
 include 'spring-webflux'
+include 'spring-webflux:reactor'
+findProject(':spring-webflux:reactor')?.name = 'reactor'
 
