@@ -16,8 +16,11 @@ public class WebFluxClientApplication {
     }
 
     @GetMapping("/posts/{id}")
-    public Map<String,String> getPost(@PathVariable Long id) throws InterruptedException {
+    public Map<String,String> getPost(@PathVariable Long id) throws Exception {
         Thread.sleep(3000);
+        if (id > 10L) {
+            throw new Exception("Too long");
+        }
         return Map.of("id", id.toString(), "content","Posts content is %d".formatted(id));
     }
 }

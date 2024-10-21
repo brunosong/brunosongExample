@@ -25,4 +25,9 @@ public class PostController {
         return postService.getMultiplePostContent(idList);
     }
 
+    @GetMapping("/search_p")
+    public Flux<PostResponse> getParallelMultiplePostContent(@RequestParam(name = "ids") List<Long> idList) {
+        return postService.getParallelMultiplePostContent(idList);
+    }
+
 }
