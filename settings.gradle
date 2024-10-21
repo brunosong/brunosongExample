@@ -4,4 +4,6 @@ include 'spring-webflux:reactor'
 findProject(':spring-webflux:reactor')?.name = 'reactor'
 include 'spring-webflux:webflux'
 findProject(':spring-webflux:webflux')?.name = 'webflux'
+include 'spring-webflux:webflux-client'
+findProject(':spring-webflux:webflux-client')?.name = 'webflux-client'
 
