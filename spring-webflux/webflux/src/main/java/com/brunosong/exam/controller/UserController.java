@@ -1,8 +1,10 @@
 package com.brunosong.exam.controller;
 
 import com.brunosong.exam.dto.UserCreateRequest;
+import com.brunosong.exam.dto.UserPostResponse;
 import com.brunosong.exam.dto.UserResponse;
 import com.brunosong.exam.dto.UserUpdateRequest;
+import com.brunosong.exam.service.PostServiceV2;
 import com.brunosong.exam.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import reactor.core.publisher.Mono;
 public class UserController {
 
     private final UserService userService;
+    private final PostServiceV2 postServiceV2;
 
     @PostMapping
     public Mono<UserResponse> createUser(@RequestBody UserCreateRequest request) {
@@ -44,6 +47,14 @@ public class UserController {
         );
     }
 
+    @DeleteMapping("/search")
+    public Mono<ResponseEntity<?>> deleteUser(@RequestParam String name) {
+        // no content (204)
+        return userService.deleteByName(name).then(
+                Mono.just(ResponseEntity.noContent().build())
+        );
+    }
+
     @PutMapping("/{id}")
     public Mono<ResponseEntity<UserResponse>> updateUser(@PathVariable Long id, @RequestBody UserUpdateRequest request) {
         // user x : 404 not found
@@ -52,5 +63,11 @@ public class UserController {
                 .map(u -> ResponseEntity.ok(UserResponse.of(u)))
                 // 전달된 값이 없으면 switchIfEmpty 가 실행
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+    }
+
+    @GetMapping("/{id}/posts")
+    public Flux<UserPostResponse> getUserPosts(@PathVariable Long id) {
+        return postServiceV2.findAllByUserId(id)
+                .map(UserPostResponse::of);
     }
 }

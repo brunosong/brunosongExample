@@ -33,6 +33,10 @@ public class UserService {
         return userRepository.deleteById(id);
     }
 
+    public Mono<Void> deleteByName(String name) {
+        return userRepository.deleteByName(name);
+    }
+
     public Mono<User> update(Long id, String name, String email) {
         return userRepository.findById(id)
                 .flatMap(u -> {
