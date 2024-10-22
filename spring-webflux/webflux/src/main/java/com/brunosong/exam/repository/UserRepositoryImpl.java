@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class UserRepositoryImpl implements UserRepository {
 
     private final ConcurrentHashMap<Long,User> userHashMap = new ConcurrentHashMap<>();
+
     private AtomicLong sequence = new AtomicLong(1L);
 
     @Override

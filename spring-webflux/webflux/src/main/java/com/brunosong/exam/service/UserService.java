@@ -1,7 +1,7 @@
 package com.brunosong.exam.service;
 
 import com.brunosong.exam.repository.User;
-import com.brunosong.exam.repository.UserRepository;
+import com.brunosong.exam.repository.UserR2dbcRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -10,7 +10,9 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-    private final UserRepository userRepository;
+
+    //private final UserRepository userRepository;
+    private final UserR2dbcRepository userRepository;
 
     public Mono<User> create(String name, String email) {
         return userRepository.save(User.builder()
@@ -27,7 +29,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Mono<Integer> deleteById(Long id) {
+    public Mono<Void> deleteById(Long id) {
         return userRepository.deleteById(id);
     }
 
