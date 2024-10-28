@@ -6,4 +6,7 @@ include 'spring-webflux:webflux'
 findProject(':spring-webflux:webflux')?.name = 'webflux'
 include 'spring-webflux:webflux-client'
 findProject(':spring-webflux:webflux-client')?.name = 'webflux-client'
+include 'ReservationWaitingSystem'
+include 'ReservationWaitingSystem:spring-mvc-front'
+findProject(':ReservationWaitingSystem:spring-mvc-front')?.name = 'spring-mvc-front'
 
