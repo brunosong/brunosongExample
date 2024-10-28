@@ -1,5 +1,6 @@
 package com.brunosong.reservation.waiting.system.flow.controller;
 
+import com.brunosong.reservation.waiting.system.flow.dto.AllowUserResponse;
 import com.brunosong.reservation.waiting.system.flow.dto.RegisterUserResponse;
 import com.brunosong.reservation.waiting.system.flow.service.UserQueueService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,13 @@ public class UserQueueController {
                                                    @RequestParam(name = "user_id") Long userId) {
         return userQueueService.registerWaitQueue(queue,userId)
                 .map(RegisterUserResponse::new);
+    }
+
+    @PostMapping("/allow")
+    public Mono<?> allowUser(@RequestParam(name = "queue", defaultValue = "default") String queue,
+                                                   @RequestParam(name = "count") Long count) {
+        return userQueueService.allowUser(queue,count)
+                .map(allowed -> new AllowUserResponse(count, allowed));
     }
 
 }
