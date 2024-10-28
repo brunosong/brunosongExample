@@ -9,4 +9,6 @@ findProject(':spring-webflux:webflux-client')?.name = 'webflux-client'
 include 'ReservationWaitingSystem'
 include 'ReservationWaitingSystem:spring-mvc-front'
 findProject(':ReservationWaitingSystem:spring-mvc-front')?.name = 'spring-mvc-front'
+include 'ReservationWaitingSystem:flow'
+findProject(':ReservationWaitingSystem:flow')?.name = 'flow'
 
