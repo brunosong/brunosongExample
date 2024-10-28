@@ -1,5 +1,6 @@
 package com.brunosong.reservation.waiting.system.flow.controller;
 
+import com.brunosong.reservation.waiting.system.flow.dto.RegisterUserResponse;
 import com.brunosong.reservation.waiting.system.flow.service.UserQueueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +17,10 @@ public class UserQueueController {
     private final UserQueueService userQueueService;
 
     @PostMapping("")
-    public Mono<?> registerUser(@RequestParam(name = "user_id") Long userId) {
-        return userQueueService.registerWaitQueue(userId);
+    public Mono<RegisterUserResponse> registerUser(@RequestParam(name = "queue", defaultValue = "default") String queue,
+                                                   @RequestParam(name = "user_id") Long userId) {
+        return userQueueService.registerWaitQueue(queue,userId)
+                .map(RegisterUserResponse::new);
     }
 
 }
