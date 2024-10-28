@@ -1,5 +1,6 @@
 package com.brunosong.reservation.waiting.system.flow.service;
 
+import com.brunosong.reservation.waiting.system.flow.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class UserQueueService {
         return reactiveRedisTemplate.opsForZSet().add(USER_QUEUE_WAIT_KEY.formatted(queue), userId.toString(), unixTimestamp)
                 // 기존에 값이 있으면 False를 반환. filter를 걸어서 false 이면 내려오는 값이 없기때문에 switchIfEmpty() 실행
                 .filter(i -> i)
-                .switchIfEmpty(Mono.error(new Exception("already register user...")))
+                .switchIfEmpty(Mono.error(ErrorCode.QUEUE_ALREADY_REGISTERED_USER.build()))
                 .flatMap(i -> reactiveRedisTemplate.opsForZSet().rank(USER_QUEUE_WAIT_KEY.formatted(queue), userId.toString()))
                 .map(i -> i + 1);
     }
