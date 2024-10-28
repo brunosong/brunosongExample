@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 
 @RestController
@@ -35,10 +34,18 @@ public class UserQueueController {
                 .map(allowed -> new AllowUserResponse(count, allowed));
     }
 
+//    @GetMapping("/allowed")
+//    public Mono<AllowedUserResponse> isAllowedUser(@RequestParam(name = "queue", defaultValue = "default") String queue,
+//                                                   @RequestParam(name = "user_id") Long userId) {
+//        return userQueueService.isAllowed(queue, userId)
+//                .map(AllowedUserResponse::new);
+//    }
+
     @GetMapping("/allowed")
     public Mono<AllowedUserResponse> isAllowedUser(@RequestParam(name = "queue", defaultValue = "default") String queue,
-                                                   @RequestParam(name = "user_id") Long userId) {
-        return userQueueService.isAllowed(queue, userId)
+                                                   @RequestParam(name = "user_id") Long userId,
+                                                   @RequestParam(name = "token") String token) {
+        return userQueueService.isAllowedByToken(queue, userId, token)
                 .map(AllowedUserResponse::new);
     }
 
