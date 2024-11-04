@@ -1,2 +1,2 @@
-rootProject.name = 'CouponIssuedSystem'
-include("coupon-core","coupon-api","coupon-consumer")
+rootProject.name = 'ReservationWaitingSystem'
+include("flow","spring-mvc-front")
