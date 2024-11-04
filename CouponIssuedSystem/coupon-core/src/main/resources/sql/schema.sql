@@ -16,7 +16,7 @@ create table 'coupon'.coupons
   DEFAULT CHARSET = utf8mb4
   COMMENT '쿠폰 정책';
 
-create table 'coupon'.coupon_issued
+create table 'coupon'.coupon_issues
   (
       'id'               BIGINT(20) not null auto_increment,
       'coupon_id'        BIGINT(20) not null comment '쿠폰 ID',
