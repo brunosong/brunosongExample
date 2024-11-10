@@ -1,7 +1,6 @@
 package com.brunosong.coupon.couponcore.service;
 
 import com.brunosong.coupon.couponcore.exception.CouponIssueException;
-import com.brunosong.coupon.couponcore.exception.ErrorCode;
 import com.brunosong.coupon.couponcore.model.Coupon;
 import com.brunosong.coupon.couponcore.model.CouponIssue;
 import com.brunosong.coupon.couponcore.repository.mysql.CouponIssueJpaRepository;
