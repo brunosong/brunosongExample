@@ -19,4 +19,21 @@ public class RedisRepository {
         // sorted set은 set보다 속도가 느리기때문에 아무래도 set으로 풀수 있는 방법을 찾아야 한다.
         return redisTemplate.opsForZSet().addIfAbsent(key, value, score);
     }
+
+    public Long sAdd(String key, String value) {
+        return redisTemplate.opsForSet().add(key,value);
+    }
+
+    public Long sCard(String key) {
+        return redisTemplate.opsForSet().size(key);
+    }
+
+    public Boolean sIsMember(String key, String value) {
+        return redisTemplate.opsForSet().isMember(key,value);
+    }
+
+    public Long rPush(String key, String value) {
+        return redisTemplate.opsForList().rightPush(key, value);
+    }
+
 }
