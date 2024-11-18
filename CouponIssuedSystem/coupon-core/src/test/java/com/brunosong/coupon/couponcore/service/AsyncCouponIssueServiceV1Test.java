@@ -7,7 +7,6 @@ import com.brunosong.coupon.couponcore.model.Coupon;
 import com.brunosong.coupon.couponcore.model.CouponType;
 import com.brunosong.coupon.couponcore.repository.mysql.CouponJpaRepository;
 import com.brunosong.coupon.couponcore.repository.redis.dto.CouponIssueRequest;
-import com.brunosong.coupon.couponcore.util.CouponRedisUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +20,8 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
-import static com.brunosong.coupon.couponcore.util.CouponRedisUtils.*;
+import static com.brunosong.coupon.couponcore.util.CouponRedisUtils.getIssueRequestKey;
+import static com.brunosong.coupon.couponcore.util.CouponRedisUtils.getIssueRequestQueueKey;
 
 class AsyncCouponIssueServiceV1Test extends TestConfig {
 
