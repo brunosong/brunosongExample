@@ -59,6 +59,11 @@ public class Coupon  extends BaseTimeEntity {
         return dateIssuedStart.isBefore(now) && dateIssuedEnd.isAfter(now);
     }
 
+    public boolean isIssueComplete() {
+        LocalDateTime now = LocalDateTime.now();
+        return dateIssuedEnd.isBefore(now) || !availableIssueQuantity();
+    }
+
     public void issue() {
         if (!availableIssueQuantity()) {
             throw new CouponIssueException(("발급 가능한 수량을 초과 합니다. total : %s, " +
