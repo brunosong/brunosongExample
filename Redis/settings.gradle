@@ -1,3 +1,4 @@
 rootProject.name = 'Redis'
 include 'strings'
+include 'listAndSet'
 
