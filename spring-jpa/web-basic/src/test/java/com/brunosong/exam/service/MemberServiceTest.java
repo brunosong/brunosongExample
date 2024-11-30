@@ -3,15 +3,25 @@ package com.brunosong.exam.service;
 import com.brunosong.exam.domain.Address;
 import com.brunosong.exam.domain.Member;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 @SpringBootTest
+@Transactional
 class MemberServiceTest {
+
+    @BeforeEach
+    void clear() {
+
+    }
 
     @Autowired
     MemberService memberService;
