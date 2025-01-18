@@ -27,4 +27,15 @@ public class HelloApiTest {
         // body Hello Spring
         Assertions.assertThat(response.getBody()).isEqualTo("Hello Spring");
     }
+
+    @Test
+    void failsHelloApi() {
+        TestRestTemplate rest = new TestRestTemplate();
+
+        // Binding , 혹은 컨버팅 이라고 부름
+        ResponseEntity<String> response =
+                rest.getForEntity("http://localhost:8080/hello?name={name}", String.class, "");
+
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
